@@ -1,3 +1,6 @@
+cloudinary:
+  service: Cloudinary
+  folder: <%= Rails.env %>
 test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
@@ -32,7 +35,3 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
-
-cloudinary:
-  service: Cloudinary
-  folder: <%= Rails.env %>
