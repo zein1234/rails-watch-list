@@ -1,19 +1,17 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :destroy]
+ before_action :set_list, only: [:show, :destroy]
 
   def index
     @lists = List.all
   end
 
   def show
-    @movies = Movie.all
     @bookmark = Bookmark.new
-    @list_movies = @list.movies
+    @review = Review.new(list: @list)
   end
 
   def new
     @list = List.new
-    @movies = Movie.all
   end
 
   def create
@@ -26,8 +24,10 @@ class ListsController < ApplicationController
   end
 
   def destroy
+    @list.destroy
+    redirect_to lists_path, status: :see_other
   end
-  
+
   private
 
   def set_list
@@ -35,6 +35,6 @@ class ListsController < ApplicationController
   end
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :photo)
   end
 end
